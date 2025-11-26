@@ -1,3 +1,8 @@
+.header {
+    background-color: var(--badges);
+    border-bottom: 1px solid var(--badges);
+}
+
 .headerContainer {
     display: flex;
     justify-content: space-between;

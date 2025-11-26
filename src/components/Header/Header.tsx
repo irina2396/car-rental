@@ -11,7 +11,7 @@ export default function Header() {
             </svg>
             <nav className={css.navigation}>
               <Link className={css.headerLink} href="/">Home</Link>
-              <Link className={css.headerLink} href="/catalog">Catalog</Link>
+              <Link className={css.headerLink} href="/cars">Catalog</Link>
             </nav>
           </div>
     </header>
