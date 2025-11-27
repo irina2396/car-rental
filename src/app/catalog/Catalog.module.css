@@ -1,0 +1,9 @@
+.catalogContainer {
+    max-width: 1440px;
+    padding: 0 120px;
+    margin: 0 auto;
+}
+
+.listWrapper {
+    margin-top: 40px;
+}

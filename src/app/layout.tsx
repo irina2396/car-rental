@@ -16,7 +16,7 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: "RentalCar",
-  description: "Каталог авто для оренди з цінами, описами та фотографіями.",
+  description: "Car rental catalog.",
 };
 
 export default function RootLayout({

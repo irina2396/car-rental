@@ -16,3 +16,17 @@ export type Car = {
   rentalConditions: string[];
   mileage: number;
 };
+
+export type CarsResponse = {
+  cars: Car[];
+  totalCars: number;
+  totalPages: number;
+  page: number;
+};
+
+export type CarFilters = {
+  brand: string;
+  rentalPrice: string;
+  minMileage: string;
+  maxMileage: string;
+};

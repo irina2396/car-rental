@@ -1,4 +1,4 @@
-.home {
+.hero {
     position: relative;
     width: 100%;
     height: 700px;
@@ -6,20 +6,19 @@
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    justify-content: center;
-    align-items: center;
 }
 
 .content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+    position: absolute;
+    top: 436px;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 783px;
     width: 100%;
-    padding-top: 436px;
+    text-align: center;
 }
 
-.title{
+.title {
     font-family: var(--font-family);
     font-weight: 700;
     font-size: 60px;
@@ -29,7 +28,7 @@
     margin-bottom: 16px;
 }
 
-.text{
+.text {
     font-family: var(--font-family);
     font-weight: 600;
     font-size: 24px;
@@ -39,7 +38,7 @@
     margin-bottom: 40px;
 }
 
-.button{
+.button {
     border-radius: 12px;
     padding: 12px 88px;
     width: 276px;
@@ -54,6 +53,6 @@
     background-color: var(--button);
 }
 
-.button:hover{
+.button:hover {
     background-color: var(--button-hover);
 }
