@@ -17,7 +17,6 @@ export default function CatalogClient() {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
-  // --- MAIN QUERY ---
   const query = useQuery<CarsResponse, Error>({
     queryKey: ["cars", filters, page],
     queryFn: () => getCars(page, filters),
@@ -25,7 +24,6 @@ export default function CatalogClient() {
     staleTime: 1000 * 60,
   });
 
-  // Load first or next page
   useEffect(() => {
     if (query.data) {
       startTransition(() => {
@@ -39,7 +37,6 @@ export default function CatalogClient() {
     }
   }, [query.data]);
 
-  // Reset when filters change
   useEffect(() => {
     startTransition(() => {
       setPage(1);
@@ -47,7 +44,6 @@ export default function CatalogClient() {
     });
   }, [filters]);
 
-  // --- LOAD MORE ---
   const loadMore = () => {
     if (page < totalPages) {
       setPage((p) => p + 1);
