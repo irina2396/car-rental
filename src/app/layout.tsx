@@ -3,6 +3,7 @@ import { Manrope, Inter} from "next/font/google";
 import "./globals.css";
 import Header from "../components/Header/Header"
 import TanStackProvider from "../components/TanStackProvider/TanStackProvider";
+import { Toaster } from "react-hot-toast";
 
 const manrope = Manrope({
   variable: "--font-geist-sans",
@@ -31,6 +32,7 @@ export default function RootLayout({
           <Header/>
             <main>{children}</main>
         </TanStackProvider>
+        <Toaster position="top-center" />
       </body>
     </html>
   );

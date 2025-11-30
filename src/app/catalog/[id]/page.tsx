@@ -1,24 +1,22 @@
-import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
 import { getCarById } from "../../../services/api";
+import CarDetailsClient from "./DetailsClient";
 
 type Props = {
-    params: Promise<{ id: string }>;
-};
+  params: Promise<{ id: string }>
+}
 
-const CarDetails = async ({ params }: Props) => {
-    const { id } = await params;
-    const queryClient = new QueryClient();
+export async function generateMetadata({ params }: Props) {
+  const { id } = await params
+  const car = await getCarById(id)
+  return {
+    title: `Car: ${car.brand}`,
+    description: car.description.slice(0, 30),
+  }
+}
 
-    await queryClient.prefetchQuery({
-        queryKey: ["car", id],
-        queryFn: () => getCarById(id),
-    });
-    
+export default async function CarDetailsPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;     
+  const car = await getCarById(id);
 
-    return (
-        <HydrationBoundary state={dehydrate(queryClient)}>
-        </HydrationBoundary>
-    );
-};
-
-export default CarDetails;
+  return <CarDetailsClient car={car} />;
+}

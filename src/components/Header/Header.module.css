@@ -1,13 +1,13 @@
 .header {
     background-color: var(--badges);
     border-bottom: 1px solid var(--badges);
+    padding: 26px 0;
 }
 
 .headerContainer {
     display: flex;
     justify-content: space-between;
-    padding: 26px 0;
-    max-width: 1200px;
+    align-items: center;
 }
 
 .navigation {
@@ -19,11 +19,11 @@
     font-family: var(--font-family);
     font-weight: 500;
     font-size: 16px;
-    line-height: 125%;
+    line-height: 1.25;
     text-align: center;
     color: var(--main);
 }
 
-.headerLink:hover {
+.active {
     color: var(--button-hover);
 }

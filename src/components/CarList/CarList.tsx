@@ -10,12 +10,9 @@ type Props = {
 
 export default function CarList({ cars }: Props) {
   return (
-    <ul className={css.list}>
-      {cars.map((car) => (
-        <li key={car.id}>
-          <CardCar car={car} />
-        </li>
-      ))}
-    </ul>
+      <ul className={css.list}>
+        {cars.map((car) => <CardCar key={car.id} car={car} />)}
+      </ul>
+    
   );
 }
