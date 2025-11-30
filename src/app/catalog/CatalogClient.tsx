@@ -8,7 +8,7 @@ import CarList from "../../components/CarList/CarList";
 import { getCars } from "../../services/api";
 import { useCarStore } from "../../lib/stores/carsStore";
 import css from "./Catalog.module.css";
-import { Car } from "../../types/car";
+import { Car, CarsResponse } from "../../types/car";
 
 export default function CatalogClient() {
   const { filters } = useCarStore();
@@ -17,42 +17,40 @@ export default function CatalogClient() {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
-  const query = useQuery({
-    queryKey: ["cars", filters],
-    queryFn: async () => await getCars(1, filters),
+  // --- MAIN QUERY ---
+  const query = useQuery<CarsResponse, Error>({
+    queryKey: ["cars", filters, page],
+    queryFn: () => getCars(page, filters),
+    refetchOnWindowFocus: false,
+    staleTime: 1000 * 60,
   });
 
+  // Load first or next page
   useEffect(() => {
     if (query.data) {
       startTransition(() => {
-        setCars(query.data.cars);
-        setPage(query.data.page);
+        if (page === 1) {
+          setCars(query.data.cars);
+        } else {
+          setCars((prev) => [...prev, ...query.data.cars]);
+        }
         setTotalPages(query.data.totalPages);
       });
     }
   }, [query.data]);
 
+  // Reset when filters change
   useEffect(() => {
-    if (query.error) {
-      toast.error("Failed to load cars");
+    startTransition(() => {
+      setPage(1);
+      setCars([]);
+    });
+  }, [filters]);
 
-      startTransition(() => {
-        setCars([]);
-      });
-    }
-  }, [query.error]);
-
-  const loadMore = async () => {
-    try {
-      const nextPage = page + 1;
-      const data = await getCars(nextPage, filters);
-
-      startTransition(() => {
-        setCars((prev) => [...prev, ...data.cars]);
-        setPage(nextPage);
-      });
-    } catch {
-      toast.error("Failed to load more cars");
+  // --- LOAD MORE ---
+  const loadMore = () => {
+    if (page < totalPages) {
+      setPage((p) => p + 1);
     }
   };
 
